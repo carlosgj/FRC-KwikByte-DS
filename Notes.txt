@@ -1,6 +1,14 @@
--Linux image compressed as gzip 
+-Found something compressed as gzip 
     -Found in raw_otb with magic number 0x1F8B at offset 0x44F8
     -Using "deflate" method
     -No flags set
     -Zipped at Fri, 03 Oct 2008 23:56:34 GMT on Uniz system
-    
+#-Within uncompressed initrd, magic number 0x53EF found at offset 0x3990 suggesting ext2 file system starting at offset 0x3558
+To find end of gzip:
+    -Size of unzipped data is 0x2BE6B0
+    -This value is appended to gzip file
+    -Value found in raw_otb.bin at offset 0x160421
+-Possible initrd compressed as gzip 
+    -In raw_otb at offset 0x160494
+    -Uncompresses to ext2 image
+    -Uncompressed size: 0x500000
