@@ -1,0 +1,6 @@
+-Linux image compressed as gzip 
+    -Found in raw_otb with magic number 0x1F8B at offset 0x44F8
+    -Using "deflate" method
+    -No flags set
+    -Zipped at Fri, 03 Oct 2008 23:56:34 GMT on Uniz system
+    
