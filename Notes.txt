@@ -8,7 +8,11 @@ To find end of gzip:
     -Size of unzipped data is 0x2BE6B0
     -This value is appended to gzip file
     -Value found in raw_otb.bin at offset 0x160421
--Possible initrd compressed as gzip 
+-Possible filesystem compressed as gzip 
     -In raw_otb at offset 0x160494
     -Uncompresses to ext2 image
     -Uncompressed size: 0x500000
+-Mounted filesystem
+-Removed root password in /etc/shadow
+-Re-gzipped filesystem ("fs_rooted.gz")
+-Joined rooted filesystem image with "header" (i.e., stuff before 0x160494)
