@@ -1,0 +1,255 @@
+/*Kwikbyte Main Style*/
+html, body, form, fieldset, h1, h2, h3, h4, h5, h6, p, pre,
+blockquote, ol, dl, address 
+{
+    font-family: "Myriad Roman", arial;
+    font-size: 8pt;
+    color: #000000;    
+}
+img        
+{
+	border-width: 0px;
+} 
+body
+{
+	margin-top: 0px;
+	margin-left:0px;
+	margin-bottom: 0px;
+	background-color: #FFFFFF;
+	text-align: center;
+	color: #000000;
+	font-family: "Myriad Roman", Arial, Verdana;
+	font-size: 8pt;
+}
+#page
+{
+	margin: 0 auto;
+	background-color: #FFFFFF;
+    width:800px;
+	text-align: center;
+	border: 1px solid #000000;
+}
+#logo
+{
+	height: 66px;
+	width: 199px;
+	text-align: left;
+}
+#view_cart_box
+{
+	width: 601px;
+	height: 66px;
+	text-align: right;
+	vertical-align: top;
+}
+#view_cart_box div
+{
+	margin: 8px 18px 0px 0px;
+}
+#view_cart_box a
+{
+	color: #B20000;
+	text-decoration: none;
+}
+#view_cart_box a:hover
+{
+	color: #000000;
+}
+#header
+{
+	width: 800px;
+	height: 90px;
+	background-image: url(../images/header_bg.gif);
+	background-repeat: no-repeat;
+	vertical-align: top;
+	text-align: left;
+}
+#red_content
+{
+	width: 206px;
+	height: 168px;
+	padding-left: 20px;
+	padding-right: 20px;
+	vertical-align: middle;
+	text-align: left;
+	background-image: url(../images/header_content_bg.gif);
+	background-repeat: no-repeat;
+	color: #FFFFFF;
+	line-height: 18px;
+}
+#red_content p
+{
+	margin: 0px;
+	padding: 0px;
+	color: #FFFFFF;
+}
+#menu
+{
+	width: 178px;
+	vertical-align:middle;
+	text-align: right;
+	background-image: url(../images/menu_bg.gif);
+	background-repeat: repeat-y;
+}
+/*navigation*/
+#nav
+{
+	margin-left: -40px !important;
+	text-align: left;
+	margin: 0px auto;
+	padding: 0px auto;
+    list-style:none;
+}
+
+#nav li
+{
+	padding-bottom: 5px;
+	padding-bottom: 5px;
+	vertical-align: middle;
+	text-align: right;
+}
+
+#nav a
+{
+	font-family: "Myriad Roman", Arial, Helvetica, sans-serif;
+    display:block;
+    color: #7E866E;
+    padding-right: 38px;
+    text-decoration:none;
+    font-size:8pt;
+	vertical-align:text-bottom;
+
+}    
+
+#nav a:hover, #nav a.selected
+{
+    color: #FFFFFF;
+    background-image: url(../images/menu_mouse_over.gif);
+    background-repeat: no-repeat;
+    background-position: 146px center;
+    font-weight: bold;
+}
+
+/*end navigation*/
+
+#bodyContent
+{
+	width: 800px;
+	background-image: url(../images/body_content_bg.gif);
+	background-repeat: no-repeat;
+	vertical-align: top;
+	text-align: left;
+}
+#left_white_space
+{
+	width: 178px;
+}
+#content
+{
+	padding-top: 30px;
+	width: 376px;
+	color: #636756;
+	vertical-align: top;
+	text-align: left;
+}
+#content p
+{
+	margin: 0px;
+	padding: 0px;
+	margin-bottom: 15px;
+	color: #636756;
+	line-height: 17px;
+	
+}
+#content h1
+{
+	margin: 0px;
+	padding: 0px;
+	padding-bottom: 10px;
+	color: #B20000;
+	font-size: 13pt;	
+}
+#content h2
+{
+	margin: 0px;
+	padding: 0px;
+	padding-bottom: 10px;
+	color: #B20000;
+	font-size: 11pt;
+}
+#content h3
+{
+	margin: 0px;
+	padding: 0px;
+	padding-bottom: 10px;
+	color: #B20000;
+	font-size: 10pt;
+}
+#content a
+{
+	color: #636756;
+	text-decoration:underline;
+}
+#content a:hover
+{
+	color: #565556;
+	text-decoration: none;
+}
+
+#right_content
+{
+	width: 223px;
+	padding-right: 15px;
+	padding-top: 25px;
+	padding-left: 8px;
+	text-align: left;
+	vertical-align: top;
+	color: #000000;
+}
+#right_content p.head_text
+{
+	margin: 0px;
+	padding: 0px;
+	padding-left: 12px;
+	color: #B20000;
+	font-size: 8pt;
+	font-weight: bold;
+	background-image: url(../images/head_text_bg.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+	text-transform: uppercase;
+}
+#right_content p.content
+{
+	margin: 0px;
+	padding: 0px;
+	margin-bottom: 15px;
+	padding-left: 12px;
+	color:#000000;
+}
+#right_content a
+{
+	color: #B20000;
+	text-decoration: none;
+}
+#footer
+{
+	width: 730px;
+	height: 56px;
+	padding-right: 70px;
+	color: #949494;
+	font-size: 7pt;
+	text-align: right;
+	background-image: url(../images/footer_bg.gif);
+	background-repeat: no-repeat;
+}
+
+/*form validation style*/
+.tfvHighlight
+{
+	color: red;
+}
+.tfvNormal
+{
+	color: #000000;
+}

@@ -1,0 +1,253 @@
+#red_box
+{
+	width: 243px;
+	height: 168px;
+	padding-left: 40px;
+	padding-right: 30px;
+	background-image: url(../images/red_box_bg.gif);
+	background-repeat: no-repeat;
+	color: #FFFFFF;
+	text-align: left;
+}
+#red_box p
+{
+	margin: 0px;
+	padding: 0px;
+	color: #FFFFFF;
+}
+#red_box p.white_head_text
+{
+	margin: 0px;
+	padding: 0px;
+	color: #FFFFFF;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+#red_box a
+{
+	color: #FFFFFF;
+	text-decoration: underline;
+}
+#red_box a:hover
+{
+	text-decoration: none;
+}
+
+#black_box
+{
+	width: 274px;
+	height: 168px;
+	padding-left: 24px;
+	padding-right: 25px;
+	background-image: url(../images/black_box_bg.gif);
+	background-repeat: no-repeat;
+	text-align: left;
+	color: #ABB09C;
+	vertical-align: middle;
+}
+#black_box a
+{
+	color: #ABB09C;
+	text-decoration: underline;
+}
+#black_box a:hover
+{
+	text-decoration: none;
+}
+#black_box div
+{
+	margin: 10px 0px 10px 0px;
+	padding: 0px;
+	width: 274px;
+	height: 148px;
+	overflow : auto;
+}
+#black_box p
+{
+	margin: 0px;
+	padding: 0px;
+	margin-bottom: 10px;
+	color: #ABB09C;
+}
+#black_box p.white_head_text
+{
+	margin: 0px;
+	padding: 0px;
+	color: #FFFFFF;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+#black_box p.red_head_text
+{
+	margin: 0px;
+	padding: 0px;
+	color: #B20000;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+#black_box p.red_head_text a
+{
+	color: #B20000;
+	text-decoration: none;
+}
+#black_box p.red_head_text a:hover
+{
+	color: #FFFFFF;
+}
+
+#menu
+{
+	width: 164px;
+	background-image: none;
+	background-color: #000000;
+}
+#nav a
+{
+	padding-right: 24px;
+}
+#bodyContent
+{
+	background-image: url(../images/sub_body_content_bg.gif);
+	background-repeat: no-repeat;
+}
+#left_white_space
+{
+	width: 48px;
+}
+
+#tech_spec_box
+{
+	width: 358px;
+	padding-left:48px;
+	padding-top: 28px;
+	background-image: url(../images/tech_bg.gif);
+	background-repeat: no-repeat;
+}
+#tech_spec_box p.head_text
+{
+	margin: 0px;
+	padding: 0px;
+	color: #B20000;
+	font-weight: bold;
+	font-size: 12pt;
+}
+#tech_spec_box a
+{
+	color: #636756;
+	text-decoration: underline;
+}
+#tech_spec_box a:hover
+{
+	color: #565556;
+	text-decoration: none;
+}
+#development_box
+{
+	width: 358px;
+	padding-left:48px;
+	padding-top: 28px;
+	background-image: url(../images/tech_bg.gif);
+	background-repeat: no-repeat;
+}
+#development_box p.head_text
+{
+	margin: 0px;
+	padding: 0px;
+	color: #B20000;
+	font-weight: bold;
+	font-size: 12pt;
+}
+#development_box p
+{
+	margin: 0px;
+	padding: 0px;
+	margin-bottom: 10px;
+	color: #000000;
+}
+#development_box a
+{
+	color: #636756;
+	text-decoration: underline;
+}
+#development_box a:hover
+{
+	color: #565556;
+	text-decoration: none;
+}
+#pricing_info_box
+{
+	width: 358px;
+	padding-left:48px;
+	padding-top: 28px;
+	background-image: url(../images/tech_bg.gif);
+	background-repeat: no-repeat;
+}
+#pricing_info_box p.head_text
+{
+	margin: 0px;
+	padding: 0px;
+	color: #B20000;
+	font-weight: bold;
+	font-size: 12pt;
+}
+#pricing_info_box p
+{
+	margin: 0px;
+	padding: 0px;
+	margin-bottom: 10px;
+	color: #000000;
+}
+#pricing_info_box a
+{
+	color: #636756;
+	text-decoration: underline;
+}
+#pricing_info_box a:hover
+{
+	color: #565556;
+	text-decoration: none;
+}
+#content
+{
+	width: 406px;
+	padding-left: 0px;
+	color: #000000;
+}
+#content p
+{
+	color: #000000;
+}
+#content td.label
+{
+	text-align: right;
+	padding-right: 15px;
+}
+#content td.input_field
+{
+	padding-bottom: 10px !important;
+	padding-bottom: 7px;
+}
+#right_content
+{
+	
+	width: 315px;
+	background-image: url(../images/right_content_bg.gif);
+	background-repeat: no-repeat;
+	padding: 0px;
+}
+#product_photo
+{
+	margin-top: 25px;
+	margin-left: 10px;
+}
+
+.fieldset{
+width:290px;
+
+}
+
+legend{
+	color: #000000;
+	padding:5px 5px;
+	margin:0px;
+}
