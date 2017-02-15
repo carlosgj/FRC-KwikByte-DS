@@ -54,32 +54,13 @@
  *
  * see AT91SAM9260 datasheet for more information
  */
-#define	OUTPUT_PIN	AT91C_PIO_PC14
-#define	INPUT_PIN	AT91C_PIO_PC5
+//#define	OUTPUT_PIN	AT91C_PIO_PC14
+#define	INPUT_PIN	AT91C_PIO_PB21
 
 static int						memMapFile;
 static AT91PS_PIOMAP			at91PioCtrlr;
 
 /* ************************ UTILITY FUNCTIONS ******************************* */
-
-
-/*
- * Set the output pin
- */
-static void SetOutput(unsigned high)
-{
-	if (high)
-	{
-		/* set high */
-		at91PioCtrlr->PIOC_SODR = (OUTPUT_PIN);
-	}
-	else
-	{
-		/* set low aka "clear" */
-		at91PioCtrlr->PIOC_CODR = (OUTPUT_PIN);
-	}
-	/* do not worry about sync */
-}
 
 
 /*
@@ -128,10 +109,10 @@ static int OpenSystemController(void)
 	at91PioCtrlr->PIOC_PER		= INPUT_PIN;
 
 	/* set digital output ports init value = 0 */
-	at91PioCtrlr->PIOC_CODR		= OUTPUT_PIN;
-	at91PioCtrlr->PIOC_PPUDR	= OUTPUT_PIN;
-	at91PioCtrlr->PIOC_PER		= OUTPUT_PIN;
-	at91PioCtrlr->PIOC_OER		= OUTPUT_PIN;
+	//at91PioCtrlr->PIOC_CODR		= OUTPUT_PIN;
+	//at91PioCtrlr->PIOC_PPUDR	= OUTPUT_PIN;
+	//at91PioCtrlr->PIOC_PER		= OUTPUT_PIN;
+	//at91PioCtrlr->PIOC_OER		= OUTPUT_PIN;
 
 	/* sync memfile */
 
@@ -155,8 +136,8 @@ int main(int argc, char **argv)
 		/* loop forever toggling output at 1 second interval */
 
 		/* set high */
-		SetOutput(1);
-		printf ("GPIO output is now high\n");
+		//SetOutput(1);
+		//printf ("GPIO output is now high\n");
 
 		/* get input */
 		printf ("GPIO input is %d\n", GetInput());
@@ -165,8 +146,8 @@ int main(int argc, char **argv)
 		usleep(500000);
 
 		/* set low */
-		SetOutput(0);
-		printf ("GPIO output is now low\n");
+		//SetOutput(0);
+		//printf ("GPIO output is now low\n");
 
 		/* get input */
 		printf ("GPIO input is %d\n", GetInput());
