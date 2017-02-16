@@ -17,6 +17,21 @@
 \end{abstract}
 
 \section{Introduction}
+\section{Connection \& Communication}
+\par Communication with the DS9260 takes place primarily over the DE9 ``competition port''. Despite appearances, this is not a plain serial port. While many of the pin functions are not yet know, basic RS232 serial capability is present on the normal pins: 2 (RX), 3 (TX), and 5 (ground). Therefore, a custom null-modem adapter was made which connects only those three pins. (The ``USB Adapter Clip'' from KwikByte was likely a similar connector, plus a FT232 or similar chip for USB operation.)
+\par Opening the serial port (115200, 8, N, 1) presents a banner and login prompt:
+\begin{verbatim}
+ --------------------
+-                  -
+- KwikByte DS9260  -
+-                  -
+- www.kwikbyte.com -
+-                  -
+--------------------
+DS9260 login:
+\end{verbatim}
+While the root account is password protected, trial and error revealed a user account called ``default'' that did not require a  password. This allowed exploration of much of the filesystem. It appears to be a fairly standard embedded Linux system with BusyBox. The application software binaries are in /ds60x/bin, consisting of nine files: lcd, mgr\_joysx, recv\_pc, send\_fms, send\_robot, manager, recv\_fms, recv\_robot, and send\_pc.
+\par For firmware updates and other pre-boot functionality, the normal boot process can be interrupted and a ``utility loader'' sent by serial as described in App. \ref{app:utilLoader}. This has basic facilities for memory read and write, as well as interaction with the SPI Flash memory.
 \section{Dissection of Factory Image}
 \par The first software item investigated was the image ``raw\_otb.bin'' provided by \href{http://www.kwikbyte.com/driverstation/binary/raw_otb.bin}{KwikByte} (also mirrored on \href{http://carlosgj.org/FRC/DS60/raw_otb.bin}{carlosgj.org} for posterity).
 \par This file is not a first-level bootloader, but is instead called from the kernel loader. As such, it is expected to contain at least the Linux kernel and an initrd. In fact, the most recognizable thing in the file is the Linux boot parameters at offset 0x58:
@@ -28,11 +43,28 @@ console=ttyS0,115200 root=/dev/ram rw initrd=0x22400000,851719 mem=64M
 Linux version 2.6.23DS60v1.0 (root@kbdev-laptop13) (gcc version 3.4.2) #7 
 Fri Oct 3 16:56:31 MST 2008
 \end{verbatim}
-\par During the unzipping process, gzip noted that ``trailing garbage'' was ignored, indicating that the compressed archive beginning at 0x44F8 does not in fact extend to the end of the file. As the gzip standard specifies, the last four bytes of a member contain the size of the uncompressed data. Noting that the size of the unzipped kernel is 0x2BE6B0, this value was found in raw\_otb.bin at offset 0x160421, indicating the end of the first gzip archive. Shortly afterwards, at offset 0x160494, another occurrance of 0x1F8B08 is found, indicating the start of another archive. The metadata shows that it was zipped on Mon, 03 Nov 2008 at 20:23:39 GMT, with maximal compression, on a Unix system, and additionally that the original filename was ``initrd\_img''. Copying 0x160494 onwards results in another valid gzip, which successfully uncompresses into a filesystem. 
+\par During the unzipping process, gzip noted that ``trailing garbage'' was ignored, indicating that the compressed archive beginning at 0x44F8 does not in fact extend to the end of the file. As the gzip standard specifies, the last four bytes of a member contain the size of the uncompressed data. Noting that the size of the unzipped kernel is 0x2BE6B0, this value was found in raw\_otb.bin at offset 0x160421, indicating the end of the first gzip archive. Shortly afterwards, at offset 0x160494, another occurrance of 0x1F8B08 is found, indicating the start of another archive. The metadata shows that it was zipped on Mon, 03 Nov 2008 at 20:23:39 GMT, with maximal compression, on a Unix system, and additionally that the original filename was ``initrd\_img''. Copying 0x160494 onwards results in another valid gzip, which successfully uncompresses into a filesystem.
+\par As a first step towards repurposing the DS9260, root access was needed to more thoroughly explore the system. First, on the host computer (running Debian Jessie), the gunzipped initrd was mounted. Then, the root entry in /etc/shadow was edited to remove the password, resulting in:
+\begin{verbatim}
+root::10933:0:99999:7:::
+bin:*:10933:0:99999:7:::
+daemon:*:10933:0:99999:7:::
+adm:*:10933:0:99999:7:::
+lp:*:10933:0:99999:7:::
+sync:*:10933:0:99999:7:::
+shutdown:*:10933:0:99999:7:::
+halt:*:10933:0:99999:7:::
+uucp:*:10933:0:99999:7:::
+operator:*:10933:0:99999:7:::
+nobody:*:10933:0:99999:7:::
+default::10933:0:99999:7:::
+\end{verbatim}
+\par This ``rooted'' filesystem image was then gzipped, making sure that the gzip header and parameters matched the original. Knowing that the compressed initrd begins at 0x160494 of raw\_otb.bin, and that raw\_otb.bin is written to Flash at 0x42000 (per App. \ref{app:utilLoader}), the rooted gzip was written to SPI at 0x1A2494 (0x42000+0x160494) using the Util Loader. This resulted in a working system with a root account which does not require a password. Surprisingly, although the rooted initrd was slightly larger than the original, the ``initrd=0x22400000,851719'' boot argument did not have to be changed. 
 \newpage 
 \begin{appendices}
 	\section{Utility Loader \& Firmware Update Instructions}
 		\includepdf[pages=-]{DS_utility_loader}
+		\label{app:utilLoader}
 	\section{Kernel Loader Update Instructions}
 		\includepdf[pages=-]{DS_kernelLoaderv12}
 	\section{Logo Update Instructions}
