@@ -446,3 +446,4 @@ Buffer written
 -1056-byte page size
 -Logo raw data stored at 0x83FBE0
 -LCD terminal device on /dev/tty1
+-Can load better console fonts with loadfont and a psf file
