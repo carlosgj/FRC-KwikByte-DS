@@ -20,7 +20,7 @@
 
 # 22MAY2009 	Initial creation (KwikByte)
 
-BASE_TOOLS=/mnt/Big_Drive/Projects/DS/buildroot/buildroot-2016.11.2/output/host/usr/bin/arm-buildroot-linux-uclibcgnueabi-
+BASE_TOOLS=../buildroot/output/host/usr/bin/arm-buildroot-linux-uclibcgnueabi-
 CC=${BASE_TOOLS}gcc
 LD=${BASE_TOOLS}ld
 
