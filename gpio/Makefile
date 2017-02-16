@@ -24,7 +24,7 @@ BASE_TOOLS=/mnt/Big_Drive/Projects/DS/buildroot/buildroot-2016.11.2/output/host/
 CC=${BASE_TOOLS}gcc
 LD=${BASE_TOOLS}ld
 
-LDFLAGS=-g -Wl,--dynamic-linker=/lib/ld-uClibc.so.0
+LDFLAGS= -g -Wall -Wl,--dynamic-linker=/lib/ld-uClibc.so.0
 
 .PHONY: all
 

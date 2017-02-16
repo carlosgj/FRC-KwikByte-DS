@@ -1,3 +1,4 @@
+
 /*
 *
 * Sample application to toggle a GPIO pin and read another
@@ -55,7 +56,7 @@
  * see AT91SAM9260 datasheet for more information
  */
 //#define	OUTPUT_PIN	AT91C_PIO_PC14
-#define	INPUT_PIN	AT91C_PIO_PB21
+#define	INPUT_PIN	AT91C_PIO_PB20
 
 static int						memMapFile;
 static AT91PS_PIOMAP			at91PioCtrlr;
@@ -68,7 +69,7 @@ static AT91PS_PIOMAP			at91PioCtrlr;
  */
 static unsigned GetInput(void)
 {
-	if ((at91PioCtrlr->PIOC_PDSR) & (INPUT_PIN))
+	if ((at91PioCtrlr->PIOB_PDSR) & (INPUT_PIN))
 	{
 		return (1);
 	}
@@ -90,10 +91,8 @@ static int OpenSystemController(void)
 		printf("ERROR: Unable to open /dev/mem\n");
 		return (errno);
 	}
-
 	at91PioCtrlr = mmap(NULL, 4096, PROT_READ | PROT_WRITE,
 		MAP_SHARED, memMapFile, (unsigned)AT91C_BASE_AIC);
-
 	if (at91PioCtrlr == MAP_FAILED)
 	{
 		printf("ERROR: Unable to mmap the system controller\n");
@@ -101,12 +100,11 @@ static int OpenSystemController(void)
 		memMapFile = -1;
 		return (errno);
 	}
-
 	/* set digital input ports */
-	at91PioCtrlr->PIOC_ODR		= INPUT_PIN;
-	at91PioCtrlr->PIOC_IFER		= INPUT_PIN;
-	at91PioCtrlr->PIOC_PPUDR	= INPUT_PIN;
-	at91PioCtrlr->PIOC_PER		= INPUT_PIN;
+	at91PioCtrlr->PIOB_ODR		= INPUT_PIN;
+	at91PioCtrlr->PIOB_IFER		= INPUT_PIN;
+	//at91PioCtrlr->PIOB_PPUDR	= INPUT_PIN;
+	at91PioCtrlr->PIOB_PER		= INPUT_PIN;
 
 	/* set digital output ports init value = 0 */
 	//at91PioCtrlr->PIOC_CODR		= OUTPUT_PIN;
@@ -115,7 +113,6 @@ static int OpenSystemController(void)
 	//at91PioCtrlr->PIOC_OER		= OUTPUT_PIN;
 
 	/* sync memfile */
-
 	return (0);
 }
 
@@ -125,6 +122,7 @@ static int OpenSystemController(void)
 
 int main(int argc, char **argv)
 {
+	printf("Starting...\n");
 	if (OpenSystemController())
 	{
 		printf("Unable to map hardware resources\n");
