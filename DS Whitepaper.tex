@@ -4,6 +4,7 @@
 \usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue]{hyperref}
 \usepackage{appendix}
 \usepackage{pdfpages}
+\usepackage{graphicx}
 %opening
 \title{Repurposing KwikByte FRC Driver Station}
 \author{Carlos Gross Jones}
@@ -17,6 +18,45 @@
 \end{abstract}
 
 \section{Introduction}
+\section{Background}
+\subsection{Hardware}
+\par The following bullet points are pulled from what remains of KwikByte's DS9260 site:
+\begin{enumerate}
+	\item RoHS Compliant
+	\item Atmel AT91SAM9260 processor
+	\item 200 MHz, ARM926EJ-S core with Java acceleration and DSP instruction extensions
+	\item Independent 8KB instruction and 8KB data caches
+	\item 64 MB SDRAM
+	\item 8 MB boot/kernel Flash
+	\item 1 GB NAND Flash - not installed
+	\item 2 x 10/100 Ethernet ports
+	\item 4 x USB 2.0 full speed host ports
+	\item 1 x competition port
+	\item 8 x digital input channels (+5VDC in user header)
+	\item 8 x digital output channels (+5VDC in user header)
+	\item 4 x analog input channels (+5VDC range in user header)
+	\item 3 x user buttons
+	\item 1 x mode toggle switch
+	\item 1 x LCD monochrome graphic (128x64)
+	\item Sturdy metal case
+\end{enumerate}
+However, examination of the PCB shows that several of the above items appear to be incorrect. 
+\begin{enumerate}
+	\item Rather than the 64 MB SDRAM in item 5 above, the DS9260 instead has 512 MB of SDRAM, implemented with two Micron MT48LC16M16A2BG ICs (fig. \ref{fig:SDRAM});
+	\item Rather than the 8 MB referenced in item 6, the DS9260 has an AT45DB642D 64 MB DataFlash IC (fig. \ref{fig:Flash}).
+\end{enumerate}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{Pictures/SRAM}
+	\caption{Dual MT48LC16M16A2BG SDRAM}
+	\label{fig:SDRAM}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{Pictures/Flash}
+	\caption{AT91SAM9260 processor and AT45DB642D DataFlash}
+	\label{fig:Flash}
+\end{figure}
 \section{Connection \& Communication}
 \par Communication with the DS9260 takes place primarily over the DE9 ``competition port''. Despite appearances, this is not a plain serial port. While many of the pin functions are not yet know, basic RS232 serial capability is present on the normal pins: 2 (RX), 3 (TX), and 5 (ground). Therefore, a custom null-modem adapter was made which connects only those three pins. (The ``USB Adapter Clip'' from KwikByte was likely a similar connector, plus a FT232 or similar chip for USB operation.)
 \par Opening the serial port (115200, 8, N, 1) presents a banner and login prompt:
@@ -32,8 +72,9 @@ DS9260 login:
 \end{verbatim}
 While the root account is password protected, trial and error revealed a user account called ``default'' that did not require a  password. This allowed exploration of much of the filesystem. It appears to be a fairly standard embedded Linux system with BusyBox. The application software binaries are in /ds60x/bin, consisting of nine files: lcd, mgr\_joysx, recv\_pc, send\_fms, send\_robot, manager, recv\_fms, recv\_robot, and send\_pc.
 \par For firmware updates and other pre-boot functionality, the normal boot process can be interrupted and a ``utility loader'' sent by serial as described in App. \ref{app:utilLoader}. This has basic facilities for memory read and write, as well as interaction with the SPI Flash memory.
+
 \section{Dissection of Factory Image}
-\par The first software item investigated was the image ``raw\_otb.bin'' provided by \href{http://www.kwikbyte.com/driverstation/binary/raw_otb.bin}{KwikByte} (also mirrored on \href{http://carlosgj.org/FRC/DS60/raw_otb.bin}{carlosgj.org} for posterity).
+\par The first software item investigated was the image ``raw\_otb.bin'' provided by \href{http://www.kwikbyte.com/driverstation/binary/raw_otb.bin}{KwikByte} (also mirrored on \href{http://carlosgj.org/FRC/DS9260/raw_otb.bin}{carlosgj.org} for posterity).
 \par This file is not a first-level bootloader, but is instead called from the kernel loader. As such, it is expected to contain at least the Linux kernel and an initrd. In fact, the most recognizable thing in the file is the Linux boot parameters at offset 0x58:
 \begin{verbatim}
 console=ttyS0,115200 root=/dev/ram rw initrd=0x22400000,851719 mem=64M
