@@ -1,0 +1,61 @@
+This simple application maps the AT91SAM9260 system controller into
+  user space to access the controllers peripherals such as GPIO, ADC, etc.
+  In this program the ADC channels are read periodically.
+
+AT91SAM9260.h was taken from open-source
+
+The board pin-out information is available at the KwikByte website:
+www.kwikbyte.com/KB9260/docs/KB9260_pinout.pdf
+
+and also available from the KB9260 product page:
+www.kwikbyte.com/KB9260.html
+
+If you are using the sample buildroot cross compiler tree from
+  KwikByte FTP server (copied to your root at /), you can build
+  with "make" command.
+
+If not, edit the Makefile for your compiler (top lines):
+
+BASE_TOOLS=/buildroot/build_arm_nofpu/staging_dir/bin
+CC=${BASE_TOOLS}/arm-linux-gcc
+LD=${BASE_TOOLS}/arm-linux-ld
+
+
+By default, the application is built as a static binary so no libraries
+  are required on the target.  Also, debugging information is included
+  so you can debug this image.
+
+If you want to reduce the size of the image, make sure libraries are installed
+  on the target and change the Makefile (LDFLAGS) so that the image is not
+  statically linked and debug information is not included
+
+Most people will not want to do this because this program is just a simple
+  example anyway.
+
+After you transfer the image to the board, make sure the file has the correct
+  permissions.  You can view the permissions with "ls -al adc_app".  You can
+  set permissions with "chmod 755 adc_app".
+
+Execute the program with "./adc_app"
+
+--------------------------------------------------------------
+Transferring the program to the board:
+
+If the app is not already on the board, you can do one of the following to
+  get it there:
+  1) Mount NFS share and copy to local directory
+  2) Copy to USB disk from PC, then copy from USB disk to board
+  3) Use TFTP  <- easiest method
+
+TFTP:
+ NOTE: some installations use eth0 while others use eth1 ***
+ NOTE: Debian uses a different command for tftp: tftp <server_ip>
+        Then, get <filename>
+
+  Verify the network configuration with "ifconfig eth0".  If you did not
+  set the IP, you can do so here with "ifconfig eth0 y.y.y.y".  
+  Now, "tftp -g -r adc_app h.h.h.h" where the 'h' characters are the IP
+  address of the TFTP server: e.g., your host PC running a simple TFTP server
+  program.  Now, check the file permissions (see above) and run the program.
+  You will see the ADC values reported on the serial terminal!
+

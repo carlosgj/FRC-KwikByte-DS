@@ -23,10 +23,10 @@ To find end of gzip:
 
 
 -GPIO:
-    -Auto/Teleop switch mapped to PIO B: Turning switch off changes B from 0xFFEF7FFF to 0xFFFF7FFF
-    -"Up" button changes B from 0xFFFF7FFF to 0xFFDF7FFF
-    -"Down" button changes B from 0xFFFF7FFF to 0xFDFF7FFF
-    -"Select" button changes B from 0xFFFF7FFF to 0xF7FF7FFF
+    -Auto/Teleop switch mapped to PIO B: Turning switch off changes B from 0xFFEF7FFF to 0xFFFF7FFF (PIOB20)
+    -"Up" button changes B from 0xFFFF7FFF to 0xFFDF7FFF (PIOB21)
+    -"Down" button changes B from 0xFFFF7FFF to 0xFDFF7FFF (PIOB25)
+    -"Select" button changes B from 0xFFFF7FFF to 0xF7FF7FFF (PIOB27)
     
 [    2.740000] mtd_dataflash spi0.0: AT45DB642x (8448 KBytes)
 [    2.750000] Creating 4 MTD partitions on "spi_flash":
@@ -445,3 +445,4 @@ Buffer written
 
 -1056-byte page size
 -Logo raw data stored at 0x83FBE0
+-LCD terminal device on /dev/tty1
